@@ -1,2 +1,2 @@
-# readquickly_WeChartSmallApp
-A WeChart small app name as readquickly
+# readquickly_WeChatSmallApp
+A WeChat small app name as readquickly
