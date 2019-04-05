@@ -6,13 +6,24 @@ class Spider(object):
     项目中所有爬虫的父类，所有爬虫使用这个接口实现
     """
 
-    headers = {
+    headers = {             # 请求头模版
             'Accept': 'application/json, text/plain, */*',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15'
     }
     
     def headers_set(self, special_headers):
         self.headers.update(special_headers)
+
+    data = {                # 数据模版
+            'title': '',
+            'source': '',
+            'time': '',
+            'text': '',
+            'pic': ''
+        }
+    
+    def data_set(self, special_data):
+        self.data.update(special_data)
 
     def __init__(self, url):
             self.url = url
