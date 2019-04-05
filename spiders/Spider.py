@@ -17,6 +17,7 @@ class Spider(object):
     data = {                # 数据模版
             'title': '',
             'source': '',
+            'href': '',
             'time': '',
             'text': '',
             'pic': ''
