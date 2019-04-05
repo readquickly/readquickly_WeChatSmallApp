@@ -68,7 +68,7 @@ class Spider(object):
             self.saveData(text)
             return True
         except Exception as e:
-            print('[Spider.run Error], e')
+            print('[Spider.run Error]', e)
             return False
 
 
