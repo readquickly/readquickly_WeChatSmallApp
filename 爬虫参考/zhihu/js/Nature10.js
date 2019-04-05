@@ -20,4 +20,4 @@ var c = new Crawler({
     }
 });
 
-c.queue('https://zhuanlan.zhihu.com/api/columns/natureresearch/articles?limit=10&offset=10');
+c.queue('https://zhuanlan.zhihu.com/api/columns/natureresearch/articles?limit=10&offset=10'); 
