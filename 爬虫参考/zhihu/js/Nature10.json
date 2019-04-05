@@ -130,7 +130,7 @@
           "type": "identity",
           "description": "已认证的官方帐号"
         }
-      ]
+      ] 
     },
     "state": "published",
     "created": 1552198031,
