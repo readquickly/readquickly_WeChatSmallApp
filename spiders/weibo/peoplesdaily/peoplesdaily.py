@@ -1,5 +1,6 @@
 import re
 import time
+import pymysql
 from Spider import *
 
 class WeiboSpider(Spider):
@@ -29,6 +30,28 @@ class WeiboSpider(Spider):
                 'X-Requested-With': 'XMLHttpRequest',
                 'MWeibo-Pwa': '1'
                 })
+        
+        # 数据库准备
+        self.db = pymysql.connect(host='localhost', user='c', password='000123', db='readquickly')
+        self.table = 'test'
+        self.cursor = self.db.cursor()
+        createTable = '''
+        CREATE TABLE IF NOT EXISTS {name} (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(255),
+            source VARCHAR(255),
+            href VARCHAR(511),
+            time VARCHAR(63),
+            text VARCHAR(2047),
+            pic VARCHAR(511),
+            PRIMARY KEY (id)
+            );
+            '''.format(name=self.table)
+        self.cursor.execute(createTable)
+
+    def __del__(self):
+        self.db.close()
+
 
     def getData(self, response):
         def parse_html(html):
@@ -50,8 +73,8 @@ class WeiboSpider(Spider):
             result = []
 
             for item in json.get('data').get('cards'):
-                useful = self.data
-                print('>>>', item.get('scheme'))
+                useful = {}                 # TODO: use self.data
+                useful['source'] = '人民日报|微博'
                 useful['href'] = item.get('scheme')
                 mblog = item.get('mblog')
                 if not mblog:
@@ -69,18 +92,34 @@ class WeiboSpider(Spider):
                         useful['text'] = parse_html(mblog.get('text'))
                     useful['time'] = mblog.get('created_at')
                     useful['pic'] = get_weibo_pic(mblog)
-                print('###', useful)
-                result.append(useful)           # BUG
-                print('@@@@@@👇\n', result, '@@@@@👆')
+                result.append(useful)
         except Exception as e:
             print('[getData Error]', e)
         finally:
             return result
 
+    def databaseUpdate(self, data):
+        keys = ', '.join(data.keys())
+        values = ', '.join(['%s'] * len(data))
+
+        sql = 'INSERT INTO {table} ({keys}) VALUES ({values}) ON DUPLICATE KEY UPDATE'.format(table=self.table, keys=keys, values=values)
+        update = ', '.join([' {key} = %s'.format(key=key) for key in data])
+
+        sql += update
+
+        try:
+            if self.cursor.execute(sql, tuple(data.values()) * 2):
+                print("> Success updating database:", ret)
+                self.db.commit()
+        except Exception as e:
+            print('[databaseUpdate Error]', e)
+            self.db.rollback()
+
+
     def saveData(self, res):
         for i in res:
-            print(i['href'], i['time'])
-        pass
+            self.databaseUpdate(i)
+
 
     def run(self):
         try:
