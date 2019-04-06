@@ -45,3 +45,19 @@ fs.writeFile('Nature.json', data_str, function(err) {
 ```
 
 在Nature10.js只爬取十篇文章为例
+
+-------------------------- 2019， April 5th --------------------------
+
+- 在Windows下安装MongoDB，并使用cmd进入到bin目录下
+- 执行mongod.exe --dbpath "一个空白文件的目录"
+- 打开另一个cmd，同样进入bin目录下，执行mongo.exe，在此终端可以执行MongoDB的各种命令 
+
+- npm install mongodb
+
+mongodb的一些入门操作
+
+- `var MongoClient = require("mongodb").MongoClient;`     *导包*
+- `var url = "mongodb://localhost:27017/"`  *存MongoDB运行的URL，端口默认27017*
+- `MongoClient.connect(url, {useNewUrlParser: true}, function (err, db) { });`   *配参*
+- *函数体中可以对数据库进行操作，操作完执行* `db.close();` *断开与数据的连接*
+
