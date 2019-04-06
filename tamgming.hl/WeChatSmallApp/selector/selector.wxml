@@ -1,0 +1,12 @@
+<!--pages/selector/selector.wxml-->
+<view class='selectBox'>
+  <!-- 显示框 -->
+  <view class='select' catchtap='selectTap'>
+    <text class='select_text'>{{selectData[index]}}</text>
+    <image class='select_img {{!selectShow&&"select_img_rotate"}}' src='./jiantou.png'></image>
+  </view>
+  <!-- 隐藏框 -->
+  <view class='optionBox' hidden='{{selectShow}}'>
+    <text class='option' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+  </view>
+</view>

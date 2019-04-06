@@ -19,6 +19,8 @@
 - [科普资讯-中国科普网](http://www.kepu.gov.cn/www/articlelist/kpzx)
 - https://github.com/zhangslob/awesome_crawl
 - [优质资讯推荐_腾讯网](https://news.qq.com)
+- <http://smzhishi.oneffy.com/>
+- 吉尼斯世界纪录
 
 ### 实现
 

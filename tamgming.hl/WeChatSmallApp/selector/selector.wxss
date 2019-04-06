@@ -1,0 +1,36 @@
+/* pages/selector/selector.wxss */
+.select_img {
+  width: 30rpx;
+  height: 30rpx;
+  transition: transform 0.3s;
+}
+.selectBox{
+  width: 32%;
+  margin-left: 20rpx;
+}
+.select{
+  font-size: 35rpx;
+}
+.select_img_rotate {
+  transform: rotate(180deg);
+}
+.option{
+  display: block;
+  font-size: 35rpx;
+  margin-top: 6rpx;
+  text-align: center;
+  color: rgb(78, 69, 69);
+}
+.select_text{
+  margin-right: 8rpx;
+}
+.optionBox{
+  position: absolute;
+  width: 110rpx;
+  border: 1px solid rgb(250, 250, 249);
+  border-radius: 8rpx;
+  padding-bottom: 6rpx;
+  background: linear-gradient(rgb(250,250,249), white,rgb(250,250,249));
+  background-color: white;
+  z-index: 9999;
+}
