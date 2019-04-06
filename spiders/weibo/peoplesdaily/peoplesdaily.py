@@ -55,6 +55,9 @@ class WeiboSpider(Spider):
             '''.format(name=self.table)
         self.cursor.execute(createTable)
 
+        # 爬虫已结束的标识符
+        self.spiderOutOfRange = False
+
     def __del__(self):
         self.db.close()
 
@@ -104,6 +107,7 @@ class WeiboSpider(Spider):
                 result.append(useful)
         except Exception as e:
             if isinstance(e, SpiderFinished):
+                self.spiderOutOfRange = True
                 raise
             print('[getData Error]', e)
         finally:
@@ -136,15 +140,15 @@ class WeiboSpider(Spider):
         MAX_PAGE = 10       # 设置一个爬取页面数的上限，防止太多出问题
         try:
             for page in range(MAX_PAGE):
+                if self.spiderOutOfRange:   # 爬虫结束
+                    print('> Spider Finished <')
+                    return True
                 url = self.basicUrl + '&page=%s' % page
                 print('爬取中...', page)
                 page = self.getPage(url)
                 res = self.getData(page)
                 self.saveData(res)
                 time.sleep(0.2)
-            return True
-        except SpiderFinished:
-            print('> Spider Finished <')
             return True
         except Exception as e:
             print('[Spider.run Error] ', e)
