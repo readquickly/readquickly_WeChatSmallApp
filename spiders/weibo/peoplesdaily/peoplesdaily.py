@@ -3,6 +3,12 @@ import time
 import pymysql
 from Spider import *
 
+class SpiderFinished(Exception):
+    """
+    抛出一个SpiderFinished代表爬完了所有待爬数据，用来控制爬虫结束。
+    """
+    pass
+
 class WeiboSpider(Spider):
     """
     爬取 [微博手机Web版](https://m.weibo.cn/) 上的 [人民日报](https://m.weibo.cn/u/2803301701)
@@ -49,6 +55,9 @@ class WeiboSpider(Spider):
             '''.format(name=self.table)
         self.cursor.execute(createTable)
 
+        # 爬虫已结束的标识符
+        self.spiderOutOfRange = False
+
     def __del__(self):
         self.db.close()
 
@@ -92,8 +101,14 @@ class WeiboSpider(Spider):
                         useful['text'] = parse_html(mblog.get('text'))
                     useful['time'] = mblog.get('created_at')
                     useful['pic'] = get_weibo_pic(mblog)
+                
+                if not re.match(r'^\d+.*?前$', useful['time']):
+                    raise SpiderFinished()
                 result.append(useful)
         except Exception as e:
+            if isinstance(e, SpiderFinished):
+                self.spiderOutOfRange = True
+                raise
             print('[getData Error]', e)
         finally:
             return result
@@ -109,7 +124,7 @@ class WeiboSpider(Spider):
 
         try:
             if self.cursor.execute(sql, tuple(data.values()) * 2):
-                print("> Success updating database:", ret)
+                # print("> Success updating database")
                 self.db.commit()
         except Exception as e:
             print('[databaseUpdate Error]', e)
@@ -122,10 +137,14 @@ class WeiboSpider(Spider):
 
 
     def run(self):
+        MAX_PAGE = 10       # 设置一个爬取页面数的上限，防止太多出问题
         try:
-            for page in range(3):
+            for page in range(MAX_PAGE):
+                if self.spiderOutOfRange:   # 爬虫结束
+                    print('> Spider Finished <')
+                    return True
                 url = self.basicUrl + '&page=%s' % page
-                print(url)
+                print('爬取中...', page)
                 page = self.getPage(url)
                 res = self.getData(page)
                 self.saveData(res)
