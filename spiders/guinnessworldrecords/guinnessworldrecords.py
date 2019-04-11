@@ -1,4 +1,5 @@
 import re
+import time
 from Spider import *
 
 class GuinnessWorldRecords_HallOfFame(Spider):
@@ -42,21 +43,15 @@ class GuinnessWorldRecords_Showcase(Spider):
     class ShowcaseIndex(Spider):
         '''
         爬取「吉尼斯世界纪录-纪录展示」的分类列表
-        例如 [{'明星': 'http://www.guinnessworldrecords.cn/records/showcase/celebrity'}]
+        例如 ('http://www.guinnessworldrecords.cn/records/showcase/celebrity', '明星')
         '''
         def __init__(self):
             self.baseUrl = 'http://www.guinnessworldrecords.cn'
             self.url = 'http://www.guinnessworldrecords.cn/records/showcase/'
 
         def getData(self, response):
-            result = []
             pattern = r'<article.*?<a href="(.*?)".*?<h4>(.*?)</h4>'
-            datas = re.findall(pattern, response.text, re.S)
-
-            for i in datas:
-                result.append({
-                    i[1]: self.baseUrl + i[0]
-                })
+            result = re.findall(pattern, response.text, re.S)
 
             return result
 
@@ -70,12 +65,14 @@ class GuinnessWorldRecords_Showcase(Spider):
         '''
         爬取「吉尼斯世界纪录-纪录展示」的某个具体类别
         '''
-        def __init__(self, categoryUrl):
+        def __init__(self, category):
             '''
-            需要提供具体类别的 url
+            需要提供具体类别的 category:
+            形如：('http://www.guinnessworldrecords.cn/records/showcase/celebrity', '明星')
             '''
             self.baseUrl = 'http://www.guinnessworldrecords.cn/'
-            self.url = categoryUrl
+            self.url = self.baseUrl + category[0]
+            self.source = category[1]
 
         def getData(self, response):
             result = []
@@ -88,7 +85,7 @@ class GuinnessWorldRecords_Showcase(Spider):
             for i in datas:
                 useful = {
                     'title': i[2],
-                    'source': '吉尼斯世界纪录展示 | Guinness World Records',
+                    'source': '吉尼斯世界纪录展示 | ' + self.source,
                     'href': self.baseUrl + i[0],
                     'time': '',
                     'text': '',
@@ -100,13 +97,29 @@ class GuinnessWorldRecords_Showcase(Spider):
             
 
     def __init__(self):
-        self.url = 'http://www.guinnessworldrecords.cn/records/showcase/'
-        self.baseUrl = 'http://www.guinnessworldrecords.cn/'
+        pass
 
+    def getPage(self):      # 用来获取「分类列表」
+        categories = self.ShowcaseIndex().run()
+        return categories
 
+    def getData(self, category):  # 用来获取某个「具体类别」
+        spider = self.ShowcaseCategory(category)
+        spider.run()
+
+    def run(self):
+        index = self.getPage()
+        total = len(index)
+        count = 1
+        for i in index:
+            print('>> Geting %s of %s.' % (count, total))
+            self.getData(i)
+            count += 1
+            time.sleep(0.5)
 
 
 if __name__ == "__main__":
     # hall_of_fame = GuinnessWorldRecords_HallOfFame()
     # hall_of_fame.run()
-    pass
+    showcase = GuinnessWorldRecords_Showcase()
+    showcase.run()
