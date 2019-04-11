@@ -44,16 +44,27 @@ class GuinnessWorldRecords_Showcase(Spider):
         爬取「吉尼斯世界纪录-纪录展示」的分类列表
         例如 [{'明星': 'http://www.guinnessworldrecords.cn/records/showcase/celebrity'}]
         '''
-        '''
-        获取一个纪录展示具体项目的目录列表，
+        def __init__(self):
+            self.baseUrl = 'http://www.guinnessworldrecords.cn'
+            self.url = 'http://www.guinnessworldrecords.cn/records/showcase/'
 
-        result = []
+        def getData(self, response):
+            result = []
+            pattern = r'<article.*?<a href="(.*?)".*?<h4>(.*?)</h4>'
+            datas = re.findall(pattern, response.text, re.S)
 
-        pattern = r'<article.*?<a href="(.*?)".*?<h4>(.*?)</h4>'
-        # 匹配到的是：("项目链接", "标题")
-        datas = re.findall(pattern, SOMETHING, re.S)
-        '''
-        pass    # TODO
+            for i in datas:
+                result.append({
+                    i[1]: self.baseUrl + i[0]
+                })
+
+            return result
+
+        def run(self):
+            response = self.getPage(self.url)
+            result =  self.getData(response)
+            return result
+            
 
     class ShowcaseCategory(Spider):
         '''
@@ -69,5 +80,6 @@ class GuinnessWorldRecords_Showcase(Spider):
 
 
 if __name__ == "__main__":
-    hall_of_fame = GuinnessWorldRecords_HallOfFame()
-    hall_of_fame.run()
+    # hall_of_fame = GuinnessWorldRecords_HallOfFame()
+    # hall_of_fame.run()
+    pass
