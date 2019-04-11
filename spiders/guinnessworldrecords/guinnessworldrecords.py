@@ -70,7 +70,34 @@ class GuinnessWorldRecords_Showcase(Spider):
         '''
         爬取「吉尼斯世界纪录-纪录展示」的某个具体类别
         '''
-        pass    # TODO
+        def __init__(self, categoryUrl):
+            '''
+            需要提供具体类别的 url
+            '''
+            self.baseUrl = 'http://www.guinnessworldrecords.cn/'
+            self.url = categoryUrl
+
+        def getData(self, response):
+            result = []
+
+            pattern = r'</article>.*?<a href="(.*?)".*?<article.*?<img src="(.*?)".*?alt="(.*?)".*?/>.*?</figure>'
+            # 匹配到的是：("原文链接", "图片链接", "标题")
+            # 注意：由于第一项前部定位困难，没有匹配到第一项
+            datas = re.findall(pattern, response.text, re.S)
+
+            for i in datas:
+                useful = {
+                    'title': i[2],
+                    'source': '吉尼斯世界纪录展示 | Guinness World Records',
+                    'href': self.baseUrl + i[0],
+                    'time': '',
+                    'text': '',
+                    'pic': self.baseUrl + i[1]
+                }
+                result.append(useful)
+
+            return result
+            
 
     def __init__(self):
         self.url = 'http://www.guinnessworldrecords.cn/records/showcase/'
