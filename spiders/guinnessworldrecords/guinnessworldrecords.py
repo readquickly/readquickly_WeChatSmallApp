@@ -65,6 +65,27 @@ class GuinnessWorldRecords_Showcase(Spider):
         '''
         爬取「吉尼斯世界纪录-纪录展示」的某个具体类别
         '''
+
+        class ItemContentSpider(Spider):
+            '''
+            爬取一个条具体世界记录的内容
+            '''
+            def __init__(self, href):
+                self.url = href
+
+            def getData(self, response):
+                html = response.text
+                pattern = r'<div xmlns="http://www.w3.org/1999/xhtml"><p>(.*?)</p>'
+                content = re.findall(pattern, html, re.S)
+                # 得到的会是一个 ['text']，只取出 'text' 来返回使用
+                return content[0]
+            
+            def run(self):
+                response = self.getPage(self.url)
+                result =  self.getData(response)
+                return result
+
+                
         def __init__(self, category):
             '''
             需要提供具体类别的 category:
@@ -91,6 +112,9 @@ class GuinnessWorldRecords_Showcase(Spider):
                     'text': '',
                     'pic': self.baseUrl + i[1]
                 }
+                # 添加具体内容(text)
+                useful['text'] = self.ItemContentSpider(useful['href']).run()
+
                 result.append(useful)
 
             return result
