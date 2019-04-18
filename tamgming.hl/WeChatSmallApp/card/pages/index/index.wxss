@@ -1,4 +1,7 @@
 /**index.wxss**/
+swiper {
+  margin-top: 10px;
+}
 .card {
   border-radius: 18px; 
   box-shadow: 10px 10px 5px #888888;
@@ -15,4 +18,10 @@
   border-radius: 0 0 18px 18px;
   color: rgba(0, 0, 0, 0.6);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+/* 去掉滑条  */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

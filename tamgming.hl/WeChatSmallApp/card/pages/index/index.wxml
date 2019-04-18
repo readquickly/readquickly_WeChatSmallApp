@@ -1,16 +1,17 @@
 <!--index.wxml-->
 <view class='lunbo'>
   <swiper indicator-dots="{{false}}" autoplay="{{false}}" circular="true" current='{{0}}' interval="{{4000}}" style='height:{{swiper_h}}'>
-  <!-- swiper高度问题未解决 -->
   <block wx:for="{{pic}}" wx:key="{{item}}">
       <swiper-item bindtap="skew">
-        <view class='card card{{index}}' animation="{{animation}}" bindtouchstart = "handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style='background-color:{{item.card_color}}'>
-          <view class='pic pic{{index}}'>
-            <image src='{{item.url}}'></image>
+        <view class='card' animation="{{animation}}" bindtouchstart = "handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend" style='background-color:{{item.card_color}}'>
+          <view class='pic'>
+            <image src='{{item.url}}' style='height:{{pic_h}}'></image>
           </view>
-          <view class='word word{{index}}'>
-            <text>{{item.text}}</text>
-          </view>
+		  <scroll-view scroll-y="true" style='height:{{text_h}};'>
+            <view class='word'>
+              <text>{{item.text}}</text>
+            </view>
+          </scroll-view>
         </view>
       </swiper-item>
     </block>
