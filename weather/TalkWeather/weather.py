@@ -7,7 +7,7 @@ import json
 
 class TalkWeather (object):
     '''
-    调用[百度智能写作API服务](https://ai.baidu.com/docs#/IntelligentWriting-API/top)来获取一篇新闻简讯
+    调用[百度智能写作API服务](https://ai.baidu.com/docs#/IntelligentWriting-API/top)来获取一篇天气简讯
     '''
 
     def __init__(self, city):
