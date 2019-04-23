@@ -7,7 +7,18 @@ import json
 
 class TalkWeather (object):
     '''
-    调用[百度智能写作API服务](https://ai.baidu.com/docs#/IntelligentWriting-API/top)来获取一篇天气简讯
+    # 天气接口
+
+    > 调用[百度智能写作API服务](https://ai.baidu.com/docs#/IntelligentWriting-API/top)来获取一篇天气简讯
+    
+    ## 调用方式：
+
+    ```py
+    w = TalkWeather('昆明')
+    result = w.run()
+    ```
+
+    得到的 `result` 将是一个符合 Spider.py 数据模版的 *useful dict*。
     '''
 
     def __init__(self, city):
@@ -99,8 +110,8 @@ class TalkWeather (object):
         '''
         使用和Spider类相似的操作，方便调用。
         '''
-        print(self._weather_content)
+        return self._weather_content
 
 if __name__ == '__main__':
-    w = TalkWeather('保定')
-    w.run()
+    w = TalkWeather('昆明')
+    print(w.run())
