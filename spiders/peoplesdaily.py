@@ -1,6 +1,5 @@
 import re
 import time
-import pymysql
 from Spider import *
 
 class SpiderFinished(Exception):
@@ -37,30 +36,8 @@ class WeiboSpider(Spider):
                 'MWeibo-Pwa': '1'
                 })
         
-        # 数据库准备
-        self.db = pymysql.connect(host='localhost', user='c', password='000123', db='readquickly')
-        self.table = 'test'
-        self.cursor = self.db.cursor()
-        createTable = '''
-        CREATE TABLE IF NOT EXISTS {name} (
-            id BIGINT NOT NULL AUTO_INCREMENT,
-            title VARCHAR(255),
-            source VARCHAR(255),
-            href VARCHAR(511),
-            time VARCHAR(63),
-            text VARCHAR(2047),
-            pic VARCHAR(511),
-            PRIMARY KEY (id)
-            );
-            '''.format(name=self.table)
-        self.cursor.execute(createTable)
-
         # 爬虫已结束的标识符
         self.spiderOutOfRange = False
-
-    def __del__(self):
-        self.db.close()
-
 
     def getData(self, response):
         def parse_html(html):
@@ -112,29 +89,6 @@ class WeiboSpider(Spider):
             print('[getData Error]', e)
         finally:
             return result
-
-    def databaseUpdate(self, data):
-        keys = ', '.join(data.keys())
-        values = ', '.join(['%s'] * len(data))
-
-        sql = 'INSERT INTO {table} ({keys}) VALUES ({values}) ON DUPLICATE KEY UPDATE'.format(table=self.table, keys=keys, values=values)
-        update = ', '.join([' {key} = %s'.format(key=key) for key in data])
-
-        sql += update
-
-        try:
-            if self.cursor.execute(sql, tuple(data.values()) * 2):
-                # print("> Success updating database")
-                self.db.commit()
-        except Exception as e:
-            print('[databaseUpdate Error]', e)
-            self.db.rollback()
-
-
-    def saveData(self, res):
-        for i in res:
-            self.databaseUpdate(i)
-
 
     def run(self):
         MAX_PAGE = 10       # 设置一个爬取页面数的上限，防止太多出问题
