@@ -59,8 +59,8 @@ class Spider(object):
         '''
         try:
             if data:
-                dbName = NewsDatabase.databaseName()
-                dbCollection = NewsDatabase.databaseCollection()
+                dbName = NewsDatabase.getDatabaseName()
+                dbCollection = NewsDatabase.getDatabaseCollection()
                 NewsDatabase.writeToDatabase(dbName, dbCollection, data)
             else:
                 raise RuntimeError('data == None')
