@@ -2,6 +2,12 @@ import re
 import time
 from Spider import *
 
+# TODO: <BUG> 暂时出现了问题:
+'''
+会有 [Spider.run Error] list index out of range 等问题
+初步估计可能是目标网站更改了 Cookies 策略，变得更严格了，无法直接爬取
+'''
+
 class GuinnessWorldRecords_HallOfFame(Spider):
     '''
     爬取 [吉尼斯世界纪录-名人堂](http://www.guinnessworldrecords.cn/records/hall-of-fame/)
