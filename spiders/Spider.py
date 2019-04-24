@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+import NewsDatabase
+
 class Spider(object):
     """
     项目中所有爬虫的父类，所有爬虫使用这个接口实现
@@ -52,14 +54,19 @@ class Spider(object):
             return None
 
     def saveData(self, data):
+        '''
+        # TODO: data: 传入结果数据的 useful list
+        '''
         try:
             if data:
-                print(data)
+                dbName = NewsDatabase.getDatabaseName()
+                dbCollection = NewsDatabase.getDatabaseCollection()
+                NewsDatabase.writeToDatabase(dbName, dbCollection, data)
             else:
                 raise RuntimeError('data == None')
         except Exception as e:
             print('[saveData Error] ', e)
-            return None       
+            return None
         
 
     def run(self):
