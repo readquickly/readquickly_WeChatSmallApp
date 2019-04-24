@@ -1,0 +1,4 @@
+<view class='link' bindtap='copy_link' style='text-decoration:{{underline}}'>
+  <image src='./link.png' style='width: 46rpx;height: 32rpx;'></image>
+  复制链接
+</view>
