@@ -95,10 +95,10 @@ class WeiboSpider(Spider):
         try:
             for page in range(MAX_PAGE):
                 if self.spiderOutOfRange:   # 爬虫结束
-                    print('> Spider Finished <')
+                    # print('> Spider Finished <')
                     return True
                 url = self.basicUrl + '&page=%s' % page
-                print('爬取中...', page)
+                # print('爬取中...', page)
                 page = self.getPage(url)
                 res = self.getData(page)
                 self.saveData(res)

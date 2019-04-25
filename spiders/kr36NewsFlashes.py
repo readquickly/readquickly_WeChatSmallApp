@@ -1,6 +1,6 @@
 from Spider import *
 
-class NewsFlashes36Kr (Spider):
+class NewsFlashes36Kr(Spider):
     '''
     爬取 [36 Kr 快讯](https://36kr.com/newsflashes)
     '''
