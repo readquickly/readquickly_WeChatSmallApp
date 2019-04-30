@@ -1,0 +1,6 @@
+.link{
+  color: rgb(50, 144, 226);
+  font-size: 32rpx;
+  line-height: 32rpx;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
