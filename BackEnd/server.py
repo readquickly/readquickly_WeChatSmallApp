@@ -1,7 +1,7 @@
 from flask import Flask, request, abort, redirect
 import json
 
-import content
+from . import content
 
 '''
 处理来自前端的请求响应
@@ -23,7 +23,7 @@ def requestNews():
     city = request.args.get('city', '')
     if city:
         print(city)
-        news = content.getContent('city')    # TODO: 调用爬好的数据，注意返回 useful list，在这里再 json.dumps(allDatas)
+        news = content.getContent(city)    # TODO: 调用爬好的数据，注意返回 useful list，在这里再 json.dumps(allDatas)
         if news != '':
             return json.dumps(news)
         else:
