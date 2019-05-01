@@ -57,9 +57,9 @@ class TalkWeather (object):
         r'''
         去掉获取到的文本中的多余字符（<p>、</p>、\u200b）
         '''
-        text = text.replace('<p>', '\t')
-        text = text.replace('</p>', '\n')
-        text = text.replace('\u200b', ' ')
+        text = text.replace('<p>', '')
+        text = text.replace('</p>', '')
+        text = text.replace('\u200b', '')
         return text
 
 
@@ -98,7 +98,7 @@ class TalkWeather (object):
                     'source': '百度',
                     'href': '',
                     'time': self._parse(weather['summary']),
-                    'text': self._parse(weather['texts'][0] + weather['texts'][1]),
+                    'text': self._parse(weather['texts'][0] + '\n\n' + weather['texts'][1]),
                     'pic': ''
                     }
             return useful
