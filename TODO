@@ -1,28 +1,33 @@
-爬取 CCTV 的 [快看](http://news.cctv.com/kuaikan/)
+# TODO 2019-05-01
 
-请求地址是：(http://news.cctv.com/kuaikan/all/data/index.json)，XHR，返回 json：
+## 手动消息接入点
 
-```
-"rollData": [
-        {
-            "title": "实拍浙江温州突发恶劣天气 下冰雹刮狂风致多人受伤",
-            "description": "4月24日下午3点多钟，浙江温州多地出现雷雨冰雹恶劣天气。其中，温州职业技术学院的图书楼前正在开展2019届毕业生毕业设计作品展暨就业推荐会。下午3点5分左右，天气突发异常，狂风骤雨、冰雹急落，造成学生和参会的企业人员多人受伤，大部分受伤人员目前都在温州医科大学附属第一医院接受急诊治疗，其中一名受伤较重的女生头部右后侧是被坍塌的简易棚砸伤,受伤人员均无生命危险。",
-            "image": "https://p2.img.cctvpic.com/photoworkspace/2019/04/25/2019042514261620955.jpg",
-            "image1": "https://p1.img.cctvpic.com/photoworkspace/2019/04/25/2019042514262035459.jpg",
-            "image2": "https://p1.img.cctvpic.com/photoworkspace/2019/04/25/2019042514262559186.jpg",
-            "content": "实拍 浙江温州 恶劣天气 下冰雹 刮狂风",
-            "catalog": "",
-            "relatedNews1": "",
-            "relatedNewsUrl1": "",
-            "relatedNews2": "",
-            "relatedNewsUrl2": "",
-            "brief": "",
-            "type": "ARTI",
-            "id": "ARTINk0H8Cew7aolrlZqiOWm190425",
-            "dateTime": "2019-04-25 14:26",
-            "url": "http://news.cctv.com/2019/04/25/ARTINk0H8Cew7aolrlZqiOWm190425.shtml"
-        },
-        {...}
-]
-```
+实现一个 `notice` 包，用来处理手动数据接入：
 
+* driver.py：手动消息接入的交互实现
+* Notice.py：手动消息接口
+* NoticeDatabase.py：数据库读写接口
+
+## 整理后端项目
+
+|-- Server
+    |-- __init__.py
+    |-- server.py   (请求服务器)
+    |-- content.py  (整合响应数据)
+    |-- spider
+        |-- __init__.py
+        |-- driver.py   (驱动各爬虫实现运行)
+        |-- Spider.py   (爬虫接口)
+        |-- NewsDatabase.py (数据库读写接口)
+        |-- cctvKuaikan.py  (爬虫实现: CCTV快看)
+        |-- kr36NewsFlashes.py  (爬虫实现: 36Kr快讯)
+        |-- wieboPeoplesDaily.py    (爬虫实现: 人民日报微博)
+    |-- weather
+        |-- __init__.py
+        |-- weather.py  (天气简讯实现)
+    |-- notice
+        |-- __init__.py
+        |-- driver.py   (手动消息接入的交互实现)
+        |-- Notice.py   (手动消息接口)
+        |-- NoticeDatabase.py   (数据库读写接口)
+         
