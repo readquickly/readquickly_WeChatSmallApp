@@ -1,7 +1,11 @@
 from flask import Flask, request, abort, redirect
+from flask import render_template
+
 import json
+import time
 
 from . import content
+from .notice import superNotice
 
 '''
 处理来自前端的请求响应
@@ -32,3 +36,25 @@ def requestNews():
         error = {'error': 'Bad arg (city) was given.'}
 
     return json.dumps(error)
+
+
+@app.route('/readquickly/admin/notice', methods=['GET', 'POST'])
+def notice():
+    error = None
+    if request.method == 'POST':
+        if request.form['title']:
+            useful = {
+                'title': request.form['title'],
+                'source': request.form['source'] or 'Admin',
+                'href': request.form['href'],
+                'time': time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())),
+                'text': request.form['text'],
+                'pic': request.form['pic'],
+                'expires': request.form['expires']
+            }
+            superNotice.saveData([useful])
+            return 'Succeed!'
+        else:
+            error = 'Invalid Data!'
+            return error
+    return render_template('notice.html')
