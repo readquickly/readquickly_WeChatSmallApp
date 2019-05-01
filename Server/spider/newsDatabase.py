@@ -41,7 +41,13 @@ def writeToDatabase(databaseName, databaseCollection, data):
         db = client[databaseName]
         collection = db[databaseCollection]
         # 插入数据
-        collection.insert_many(data)
+        # 存在标题相同的则更新，不存在新建
+        for item in data:
+            collection.update_one(
+                {'title': item['title']},
+                {'$set': item},
+                upsert=True
+                )
     except Exception as e:
         print('[NewsDatabase.writeToDatabase Error] False to write data to database: %s' % e)
         # 为防止数据丢失，把数据写到标准输出
