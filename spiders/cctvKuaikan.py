@@ -52,5 +52,5 @@ class kuaikanCctv(Spider):
         return result
 
 if __name__ == '__main__':
-    n = kuaikanCctv()
-    n.run()
+    k = kuaikanCctv()
+    k.run()
