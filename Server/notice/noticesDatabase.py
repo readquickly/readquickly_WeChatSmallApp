@@ -84,7 +84,7 @@ def isFresh(item):
     '''
     dateTime = item.get('time')
     expiresHour = item.get('expires') or 0
-    expiresHour = int(expiresHour)
+    expiresHour = float(expiresHour)
     expireSecond = expiresHour * 60 * 60
     
     if dateTime:
