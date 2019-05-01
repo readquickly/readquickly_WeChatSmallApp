@@ -1,17 +1,17 @@
-from Spider import *
+from superSpider import *
 
 class NewsFlashes36Kr(Spider):
     '''
-    爬取 CCTV 的 [快看](http://news.cctv.com/kuaikan/)
+    爬取 [36 Kr 快讯](https://36kr.com/newsflashes)
     '''
 
     def __init__(self):
-        self.url = 'http://news.cctv.com/kuaikan/all/data/index.json'
-        # 直接用这个 url 就可以得到需要的 json 数据，整理成 useful list 就行
+        self.url = 'https://36kr.com/pp/api/newsflash?per_page=10'
+        # 直接用如上请求可以获取前十条快讯
         
     def getData(self, response):
         content = response.json()
-        data = content['rollData']
+        data = content['data']
 
         result = []
 
