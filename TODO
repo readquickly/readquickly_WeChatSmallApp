@@ -17,8 +17,8 @@
     |-- spider
         |-- __init__.py
         |-- driver.py   (驱动各爬虫实现运行)
-        |-- Spider.py   (爬虫接口)
-        |-- NewsDatabase.py (数据库读写接口)
+        |-- superSpider.py   (爬虫接口)
+        |-- newsDatabase.py (数据库读写接口)
         |-- cctvKuaikan.py  (爬虫实现: CCTV快看)
         |-- kr36NewsFlashes.py  (爬虫实现: 36Kr快讯)
         |-- wieboPeoplesDaily.py    (爬虫实现: 人民日报微博)
@@ -28,6 +28,6 @@
     |-- notice
         |-- __init__.py
         |-- driver.py   (手动消息接入的交互实现)
-        |-- Notice.py   (手动消息接口)
-        |-- NoticeDatabase.py   (数据库读写接口)
+        |-- superNotice.py   (手动消息接口)
+        |-- noticeDatabase.py   (数据库读写接口)
          

@@ -17,6 +17,28 @@
 
 - [NewsDatabase]: 处理爬虫和数据库的交互
 
+## 爬虫模版
+
+使用 当前目录下的 `Spider.py` 作为模版接口来实现爬虫。
+
+## 标准数据
+
+所有最终得到的数据整理为：
+
+```py
+{
+    'title': '文章标题',
+    'source': '文章来源',
+    'href': '原文地址',
+    'time': '发布时间',
+    'text': '文章内容',
+    'pic': '图片url地址'
+}
+```
+
+把这种格式的数据称为 `useful dict`，
+`[{USEFUL-DICT}, {}, ...]` 称为 `useful list`
+
 ## 使用说明
 
 ```
@@ -24,27 +46,3 @@ import spiders
 spiders.run()
 ```
 '''
-
-def run():
-    print('爬取"CCTV快看"...')
-    c = cctvKuaikan.kuaikanCctv()
-    c.run()
-    print('完成。')
-
-    print('爬取"36氪快讯"...')
-    k = kr36NewsFlashes.NewsFlashes36Kr()
-    k.run()
-    print('完成。')
-
-    print('爬取"人民日报微博"...')
-    p = peoplesdaily.WeiboSpider()
-    p.run()
-    print('完成。')
-
-
-if __name__ == '__main__':
-    import peoplesdaily
-    import kr36NewsFlashes
-    import cctvKuaikan
-    
-    run()
