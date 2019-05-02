@@ -5,7 +5,7 @@ import json
 import time
 
 from . import content
-from .notice import superNotice
+from .notice import superNotice, admindo
 
 '''
 处理来自前端的请求响应
@@ -40,9 +40,9 @@ def requestNews():
 
 @app.route('/readquickly/admin/notice', methods=['GET', 'POST'])
 def notice():
-    error = None
+    response = None
     if request.method == 'POST':
-        if request.form['title']:
+        if admindo.exist(request.form['key']):
             useful = {
                 'title': request.form['title'],
                 'source': request.form['source'] or 'Admin',
@@ -52,9 +52,15 @@ def notice():
                 'pic': request.form['pic'],
                 'expires': request.form['expires']
             }
-            superNotice.saveData([useful])
-            return 'Succeed!'
+
+            if useful['title'] == useful['text'] == '':
+                response = '<h1>Invalid Data!</h1><p>Unexpected Empty Notice.</p>'
+            else:
+                superNotice.saveData([useful])
+                response = '<h1>Succeed!</h1>'
         else:
-            error = 'Invalid Data!'
-            return error
-    return render_template('notice.html')
+            response = '<h1>Invalid Data!</h1><p>Unexpected Key.</p>'
+
+        return response
+        
+    return render_template('newNotice.html')
