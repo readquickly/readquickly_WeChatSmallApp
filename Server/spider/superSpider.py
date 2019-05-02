@@ -1,11 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-import NewsDatabase
+import newsDatabase
 
 class Spider(object):
     """
     项目中所有爬虫的父类，所有爬虫使用这个接口实现
+
+    s = Spider("http://www.baidu.com")
+    s.run()
     """
 
     headers = {             # 请求头模版
@@ -59,9 +62,9 @@ class Spider(object):
         '''
         try:
             if data:
-                dbName = NewsDatabase.getDatabaseName()
-                dbCollection = NewsDatabase.getDatabaseCollection()
-                NewsDatabase.writeToDatabase(dbName, dbCollection, data)
+                dbName = newsDatabase.getDatabaseName()
+                dbCollection = newsDatabase.getDatabaseCollection()
+                newsDatabase.writeToDatabase(dbName, dbCollection, data)
             else:
                 raise RuntimeError('data == None')
         except Exception as e:
@@ -78,8 +81,3 @@ class Spider(object):
         except Exception as e:
             print('[Spider.run Error]', e)
             return False
-
-
-if __name__ == "__main__":
-    s = Spider("http://www.baidu.com")
-    s.run()

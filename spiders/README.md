@@ -8,6 +8,7 @@
     * [peoplesdaily](./weibo/peoplesdaily): 爬取「人民日报」，获取重要新闻资讯
 * [guinnessworldrecords](./guinnessworldrecords): 爬取「吉尼斯世界纪录」
 * [kr36](./kr36)：爬取「36氪快讯」
+* [cctvKuaikan](./cctvKuaikan.py)：爬取「CCTV快看」
 
 ## 爬虫模版
 

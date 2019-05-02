@@ -1,0 +1,33 @@
+# TODO 2019-05-01
+
+## 手动消息接入点
+
+实现一个 `notice` 包，用来处理手动数据接入：
+
+* driver.py：手动消息接入的交互实现
+* Notice.py：手动消息接口
+* NoticeDatabase.py：数据库读写接口
+
+## 整理后端项目
+
+|-- Server
+    |-- __init__.py
+    |-- server.py   (请求服务器)
+    |-- content.py  (整合响应数据)
+    |-- spider
+        |-- __init__.py
+        |-- driver.py   (驱动各爬虫实现运行)
+        |-- superSpider.py   (爬虫接口)
+        |-- newsDatabase.py (数据库读写接口)
+        |-- cctvKuaikan.py  (爬虫实现: CCTV快看)
+        |-- kr36NewsFlashes.py  (爬虫实现: 36Kr快讯)
+        |-- wieboPeoplesDaily.py    (爬虫实现: 人民日报微博)
+    |-- weather
+        |-- __init__.py
+        |-- weather.py  (天气简讯实现)
+    |-- notice
+        |-- __init__.py
+        |-- driver.py   (手动消息接入的交互实现)
+        |-- superNotice.py   (手动消息接口)
+        |-- noticeDatabase.py   (数据库读写接口)
+         
