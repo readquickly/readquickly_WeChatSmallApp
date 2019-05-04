@@ -1,6 +1,6 @@
-import wieboPeoplesDaily
-import kr36NewsFlashes
-import cctvKuaikan
+from . import wieboPeoplesDaily
+from . import kr36NewsFlashes
+from . import cctvKuaikan
 
 def run():
     print('爬取"CCTV快看"...')

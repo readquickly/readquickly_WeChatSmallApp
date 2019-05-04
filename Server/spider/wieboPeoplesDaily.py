@@ -1,6 +1,6 @@
 import re
 import time
-from superSpider import *
+from .superSpider import *
 
 class SpiderFinished(Exception):
     """

@@ -1,6 +1,6 @@
 import re
 import time
-from superSpider import *
+from .superSpider import *
 
 # TODO: <BUG> 暂时出现了问题:
 '''

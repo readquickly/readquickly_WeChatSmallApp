@@ -1,4 +1,4 @@
-from superSpider import *
+from .superSpider import *
 
 class NewsFlashes36Kr(Spider):
     '''
