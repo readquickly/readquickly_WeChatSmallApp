@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-import newsDatabase
+from . import newsDatabase
 
 class Spider(object):
     """

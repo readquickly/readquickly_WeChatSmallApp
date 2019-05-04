@@ -6,6 +6,7 @@ import time
 
 from . import content
 from .notice import superNotice, admindo
+from .spider import driver as spiderDriver
 
 '''
 处理来自前端的请求响应
@@ -17,10 +18,12 @@ $ flask run --host=0.0.0.0
 
 app = Flask(__name__)
 
+# 根目录，测试链接通畅
 @app.route('/')
 def index():
     return 'Hello, Read Quickly!'
 
+# 前端请求数据
 @app.route('/readquickly/api/getnews', methods=['GET'])
 def requestNews():
     error = None
@@ -37,7 +40,7 @@ def requestNews():
 
     return json.dumps(error)
 
-
+# 手动添加数据
 @app.route('/readquickly/admin/notice', methods=['GET', 'POST'])
 def notice():
     response = None
@@ -64,3 +67,9 @@ def notice():
         return response
         
     return render_template('newNotice.html')
+
+# 刷新爬虫数据
+@app.route('/readquickly/refresh', methods=['GET', 'POST'])
+def refresh():
+    spiderDriver.run()
+    return "<h1>Succeed!</h1>"

@@ -1,4 +1,4 @@
-from superSpider import *
+from .superSpider import *
 import time
 
 class kuaikanCctv(Spider):
