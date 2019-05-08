@@ -1,4 +1,3 @@
-'''
 # 爬虫模块
 
 ## 使用说明
@@ -57,5 +56,4 @@ news = newsDatabase.readFromDatabase(name, collection)
 把这种格式的数据称为 `useful dict`，
 `[{USEFUL-DICT}, {}, ...]` 称为 `useful list`
 
-⚠️【注意】** 所有的数据最后*务必*整理成 `useful list`！**
-'''
+⚠️【注意】**所有的数据最后*务必*整理成 `useful list`！**
