@@ -53,7 +53,7 @@ def notice():
                 'time': time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())),
                 'text': request.form['text'],
                 'pic': request.form['pic'],
-                'expires': request.form['expires']
+                'expires': request.form['expires'] or "0"
             }
 
             if useful['title'] == useful['text'] == '':
