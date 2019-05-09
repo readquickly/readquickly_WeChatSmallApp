@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Notice</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: serif
+        }
+    </style>
+</head>
+
+<body>
+    <!--标题-->
+    <div id="title">
+        <nav class="navbar navbar-top">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <h1>Add a Notice | ReadQuickly</h1>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!--内容-->
+    <!--通知栏-->
+    <!--
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+        <strong>[Title]: </strong>
+        <p>[Detail]</p>
+    </div>
+    -->
+
+    <!--表单部分-->
+    <form action="/readquickly/admin/notice" method="post">
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <h3>
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                基本信息
+            </h3>
+            <div class="form-group">
+                <label for="source">来源</label>
+                <input type="text" name="source" class="form-control" id="source" placeholder="管理员">
+            </div>
+            <div class="form-group">
+                <label for="href">链接</label>
+                <input type="url" name="href" class="form-control" id="href" placeholder="https://example.com">
+            </div>
+            <div class="form-group">
+                <label for="pic">图片URL</label>
+                <input type="text" name="pic" class="form-control" id="pic" placeholder="https://example.com/img.jpg">
+            </div>
+            <div class="form-group">
+                <label for="expires">存在时长（小时）</label>
+                <input type="number" name="expires" class="form-control" id="expires" placeholder="0" value="24" min="0"
+                    step="0.1">
+            </div>
+        </div>
+
+        <div class="col-xs-10 col-sm-8 col-md-8">
+            <h3>
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                文本内容
+            </h3>
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="必须输入标题！">
+            </div>
+            <div class="form-group">
+                <label for="text">内容</label>
+                <textarea name="text" class="form-control" id="text" rows="10" placeholder="文本内容"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5 col-sm-5 col-md-5 panel " id="form_btns">
+                <h3>
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    授权提交
+                </h3>
+                <div class="form-group">
+                    <label for="key">授权</label>
+                    <input type="password" name="key" class="form-control" id="key" placeholder="输入授权密钥">
+                    <button class="btn btn-success" type="submit">
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        提交
+                    </button>
+                    <button type="reset" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                        重置
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <!--页脚-->
+    
+
+    <!--scripts-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!--mine Weather-->
+    <script src="./weather/weather.js"></script>
+    <script>echoIconWeatherBlock('auto_ip', "#mineWeather");</script>
+
+</html>
+
+
+
+</body>
+
+</html>
