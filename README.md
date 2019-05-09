@@ -17,7 +17,7 @@
 
 ### 效果图
 
-![0509_6](img/README/0509_6.gif)
+![0509_5](img/README/0509_5.gif)
 
 ## ReadQuickly 后端
 
