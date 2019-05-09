@@ -1,0 +1,34 @@
+<view class='lunbo'>
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" circular="true" interval="{{4000}}" style='height:{{swiper_h}}'>
+  <block wx:for="{{pic}}" wx:key="{{item}}">
+      <swiper-item>
+        <view class='card' animation="{{animation}}" bindtouchstart = "handletouchtart" bindtouchmove="handletouchmove" bindtouchend="handletouchend">
+          <view class='pic' bindtap="skew" style='background-color:{{item.card_color}}'>
+            <image src='{{item.pic}}' style='height:{{pic_h}}'></image>
+          </view>
+		  <scroll-view  class="scroll_text"scroll-y="true" style='height:{{text_h}};background-color:{{item.card_color}};' >
+            <!-- 复制链接，展示来源 -->
+            <view class='link_source'>
+              <view class='link' bindtap='copy_link' style='text-decoration:{{underline}}'>
+                <image src='../pictures/link.png' style='width: 46rpx;height: 32rpx;'></image>复制链接
+              </view>
+              <view class='source'>
+                <image src='../pictures/right.png' style='width:32rpx;height:32rpx;'></image>来源:{{item.source}}
+              </view>
+            </view>
+            <!-- 标题 -->
+            <view class="title">{{item.title}}</view>
+            <!-- 时间 -->
+            <view class='time'>
+              <image src='../pictures/time.png' style='width:33rpx;height:33rpx;'></image>{{item.time}}
+            </view>
+            <!-- 正文 -->
+            <view class='word'>
+              <text>{{item.text}}</text>
+            </view>
+          </scroll-view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

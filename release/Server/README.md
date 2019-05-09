@@ -1,35 +1,6 @@
-# readquickly_WeChatSmallApp
+# ReadQuickly 后端
 
-> A WeChat small app name as readquickly
-
-## ReadQuickly 前端
-
-> 快看(ReadQuickly)小程序 会自动整合多来源的天气、新闻资讯，向用户提供一份可快速查看的信息集合。
-
-### 实现一览
-
-- 实现了位置信息获取，调用腾讯地理位置服务API
-- 实现动态修改卡片的内容，以四张卡片容器展示所有内容
-- 实现滑动卡片的过渡动画效果，识别左右滑动
-- 实现了卡片内容的排版，以及复制原文链接的功能
-- 其他一些细节处理，比如爬取的数据若无原文链接，则复制后为百度搜索title相关内容，若无图片则统一给出一张图片提示
--  ···
-
-### 效果图
-
-![0509_4](screenshot/0509_4.gif)
-
-![1234](screenshot/FAA9B5181C.jpg)
-
-![334](screenshot/3ADB524002.jpg)
-
-![343](screenshot/BAB541E1444.jpg)
-
-## ReadQuickly 后端
-
-> ReadQuickly 后端自动整合来自百度大脑以及各种爬虫获取的数据，向前端提供格式统一、内容精简的新闻简讯。
-
-### 目录结构
+## 目录结构
 
 ```
 >-- Server		[后端包]
@@ -55,7 +26,7 @@
          
 ```
 
-### 环境依赖
+## 环境依赖
 
 * MongoDB v4+
 * Python 3.6+
@@ -66,7 +37,7 @@
 * BeautifulSoup
 * PyMongo
 
-###  配置说明
+##  配置说明
 
 1. 开启 MongoDB 服务
 
@@ -90,7 +61,7 @@ flask run --host=0.0.0.0
 
    浏览器访问 `http://127.0.0.1:5000` 若请求成功则配置有很大可能已经配置成功。
 
-### 服务实现
+## 服务实现
 
 ReadQuickly 后端使用了 Flask 框架来处理请求服务以及后台操作。 
 
