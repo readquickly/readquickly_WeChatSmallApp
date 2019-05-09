@@ -1,4 +1,3 @@
-'''
 # 处理手动数据接入
 
 ## 使用说明
@@ -10,5 +9,3 @@
 * admindo.py：操作权限认证
 * superNotice.py：手动消息接口
 * noticesDatabase.py：数据库读写接口
-
-'''
